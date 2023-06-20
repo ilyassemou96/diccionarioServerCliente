@@ -11,7 +11,7 @@ public class FormClientDictionary extends javax.swing.JFrame {
     
     public FormClientDictionary() throws IOException {
         initComponents();
-        clientDictionary = new ClientDictionary("192.168.0.25", 2000, jTAMsgFromServer );
+        clientDictionary = new ClientDictionary("192.168.56.1", 8080, jTAMsgFromServer ); // 0.25 9000
         //(tbIPAdress.getText(), Integer.parseInt((tbPortAdress.getText())), jTAMsgFromServer);
     }
 
@@ -34,7 +34,7 @@ public class FormClientDictionary extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         butgrSexo = new javax.swing.ButtonGroup();
@@ -101,7 +101,7 @@ public class FormClientDictionary extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTAShowMsgIN);
 
         bStopClient.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bStopClient.setText("Strop");
+        bStopClient.setText("Stop");
         bStopClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bStopClientActionPerformed(evt);
@@ -227,17 +227,17 @@ public class FormClientDictionary extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 540, 460));
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void tbPortAdressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbPortAdressActionPerformed
+    private void tbPortAdressActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbPortAdressActionPerformed
+    }                                            
 
-    private void tbIPAdressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbIPAdressActionPerformed
+    private void tbIPAdressActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbIPAdressActionPerformed
+    }                                          
 
-    private void bStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStartActionPerformed
+    private void bStartActionPerformed(java.awt.event.ActionEvent evt) {                                       
          try {
              // TODO add your handling code here:
              enviarPeticion();
@@ -246,21 +246,24 @@ public class FormClientDictionary extends javax.swing.JFrame {
          }
         clientDictionary.start();
         
-    }//GEN-LAST:event_bStartActionPerformed
+    }                                      
 
-    private void bStopClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStopClientActionPerformed
+    private void bStopClientActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:        
-    }//GEN-LAST:event_bStopClientActionPerformed
+    }                                           
    
-    private void jBSendWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSendWordActionPerformed
+    private void jBSendWordActionPerformed(java.awt.event.ActionEvent evt) {                                           
         
         jTAShowMsgIN.append(jTFSendMsgToServer.getText() + "\n");
         clientDictionary.out.println(jTFSendMsgToServer.getText());
         try {
             clientDictionary.esperar();
             try {
-                clientDictionary.palabra = jTFSendMsgToServer.getText();
-                clientDictionary.enviarMensaje(clientDictionary.out, clientDictionary.in, jTFSendMsgToServer.getText());
+                clientDictionary.palabra = jTFSendMsgToServer.getText(); 
+                
+                clientDictionary.enviarMensaje(clientDictionary.out, clientDictionary.in, jTFSendMsgToServer.getText() );
+                jTFSendMsgToServer.setText(""); // Vaciamos el campo.
+                
             } catch (IOException ex) {
                 Logger.getLogger(FormClientDictionary.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -280,11 +283,11 @@ public class FormClientDictionary extends javax.swing.JFrame {
             }
             */
         
-    }//GEN-LAST:event_jBSendWordActionPerformed
+    }                                          
 
-    private void jTFSendMsgToServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFSendMsgToServerActionPerformed
+    private void jTFSendMsgToServerActionPerformed(java.awt.event.ActionEvent evt) {                                                   
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFSendMsgToServerActionPerformed
+    }                                                  
     //
     
     public void enviarPeticion() throws IOException {
@@ -301,8 +304,9 @@ public class FormClientDictionary extends javax.swing.JFrame {
             clientDictionary.PORT = Integer.parseInt(tbPortAdress.getText());
         }
         
-        String palabra = "#DICTIONARY#CONECTION#miUsuario"; //jTFSendMsgToServer.getText();
-        clientDictionary.enviarMensaje(clientDictionary.out, clientDictionary.in, palabra);
+        //String palabra = jTFSendMsgToServer.getText();
+        //clientDictionary.enviarMensaje(clientDictionary.out, clientDictionary.in, palabra);
+        
         //clientDictionary = new ClientDictionary();        
         //clientDictionary.sendWordToServer();
         //clientDictionary.start();
@@ -311,7 +315,7 @@ public class FormClientDictionary extends javax.swing.JFrame {
     }
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton bStart;
     private javax.swing.JButton bStopClient;
     public static javax.swing.ButtonGroup butgrSexo;
@@ -331,5 +335,5 @@ public class FormClientDictionary extends javax.swing.JFrame {
     private javax.swing.JLabel labPortAdress;
     public static javax.swing.JTextField tbIPAdress;
     public static javax.swing.JTextField tbPortAdress;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
